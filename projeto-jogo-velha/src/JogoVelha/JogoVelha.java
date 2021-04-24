@@ -12,19 +12,56 @@ package JogoVelha;
  */
 public class JogoVelha {
 
-    int tabuleiro[][] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    char jogoVelha[][] = new char[3][3];
+    int jogada = 1; // Conta número de Jogadas
 
-    // Método para mostrar tabuleiro
-    void mostraTabuleiro() {
-        for (int row = 0; row < 3; row++) {
-            for (int column = 0; column < 3; column++) {
-                System.out.print(" " + tabuleiro[row][column]);
+    boolean validarJogada(int linha, int coluna, char sinal) {
+        if (jogoVelha[linha][coluna] == sinal || jogoVelha[linha][coluna] == 'O') {//Inicio if valida simbolo
 
-            }System.out.println(" ");
+            return false;
+        } else {//Jogada válida
+            jogoVelha[linha][coluna] = sinal;
+            jogada++; // incrementa a cada jogada, pares = jogador 2 e impares = jogador 1.
+            return true;
+
+        }//Fim if valida simbolo
+    }
+
+    //Imprimir tabuleiro
+    void imprimirTabuleiro() {
+        for (int i = 0; i < jogoVelha.length; i++) {
+            for (int j = 0; j < jogoVelha[i].length; j++) {
+                System.out.print(jogoVelha[i][j] + " | ");
+            }//Fim for j
+            System.out.println();
+        }//Fim for i
+    }
+
+    boolean verificarGanhador(char sinal) {//Inicio verifica jogador
+        //Valida Jogador
+        if ((jogoVelha[0][0] == sinal && jogoVelha[0][1] == sinal && jogoVelha[0][2] == sinal) || //Linha 1
+                (jogoVelha[1][0] == sinal && jogoVelha[1][1] == sinal && jogoVelha[1][2] == sinal) || //Linha 2
+                (jogoVelha[2][0] == sinal && jogoVelha[2][1] == sinal && jogoVelha[2][2] == sinal) || //Linha 3
+                (jogoVelha[0][0] == sinal && jogoVelha[1][0] == sinal && jogoVelha[2][0] == sinal) || //Coluna 1
+                (jogoVelha[0][1] == sinal && jogoVelha[1][1] == sinal && jogoVelha[2][1] == sinal) || //Coluna 2
+                (jogoVelha[0][2] == sinal && jogoVelha[1][2] == sinal && jogoVelha[2][2] == sinal) || //Coluna 3
+                (jogoVelha[0][0] == sinal && jogoVelha[1][1] == sinal && jogoVelha[2][2] == sinal) || //Diagonal 1
+                (jogoVelha[0][2] == sinal && jogoVelha[1][1] == sinal && jogoVelha[2][0] == sinal))//Diagonal 2
+        {
+            return true;
+
+        } else {
+            return false;
         }
-    }//Fim método mostrarTabuleiro
-    //Método para escolha 
-    void escolherPosicao(){
+    }//Fim verifica jogador
+
+    boolean vezJogador1() {
+        if (jogada % 2 == 1) {
+            return true;
+        } else {
+            return false;
         }
+
+    }
 
 }
