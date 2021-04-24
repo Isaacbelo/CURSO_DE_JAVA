@@ -49,7 +49,7 @@ public class JogoVelhaApp {
             } else if (jogoDaVelha.verificarGanhador('O')) {
                 ganhou = true;
                 System.out.println("Vencedor => Jogador 2!");
-            } else if (jogoDaVelha.jogada > 9) {
+            } else if (jogoDaVelha.getJogada() > 9) {
                 ganhou = true;
                 System.out.print("VELHA");
             }

@@ -12,41 +12,46 @@ package JogoVelha;
  */
 public class JogoVelha {
 
-    char jogoVelha[][] = new char[3][3];
-    int jogada = 1; // Conta número de Jogadas
+    private char jogoVelha[][];
+    private int jogada; // Conta número de Jogadas
 
-    boolean validarJogada(int linha, int coluna, char sinal) {
-        if (jogoVelha[linha][coluna] == sinal || jogoVelha[linha][coluna] == 'O') {//Inicio if valida simbolo
+    public JogoVelha() {
+        jogoVelha = new char[3][3];
+        jogada = 1;
+    }
+
+    public boolean validarJogada(int linha, int coluna, char sinal) {
+        if (getJogoVelha()[linha][coluna] == sinal || getJogoVelha()[linha][coluna] == 'O') {//Inicio if valida simbolo
 
             return false;
         } else {//Jogada válida
-            jogoVelha[linha][coluna] = sinal;
-            jogada++; // incrementa a cada jogada, pares = jogador 2 e impares = jogador 1.
+            getJogoVelha()[linha][coluna] = sinal;
+            setJogada(getJogada() + 1); // incrementa a cada jogada, pares = jogador 2 e impares = jogador 1.
             return true;
 
         }//Fim if valida simbolo
     }
 
     //Imprimir tabuleiro
-    void imprimirTabuleiro() {
-        for (int i = 0; i < jogoVelha.length; i++) {
-            for (int j = 0; j < jogoVelha[i].length; j++) {
-                System.out.print(jogoVelha[i][j] + " | ");
+    public void imprimirTabuleiro() {
+        for (int i = 0; i < getJogoVelha().length; i++) {
+            for (int j = 0; j < getJogoVelha()[i].length; j++) {
+                System.out.print(getJogoVelha()[i][j] + " | ");
             }//Fim for j
             System.out.println();
         }//Fim for i
     }
 
-    boolean verificarGanhador(char sinal) {//Inicio verifica jogador
+    public boolean verificarGanhador(char sinal) {//Inicio verifica jogador
         //Valida Jogador
-        if ((jogoVelha[0][0] == sinal && jogoVelha[0][1] == sinal && jogoVelha[0][2] == sinal) || //Linha 1
-                (jogoVelha[1][0] == sinal && jogoVelha[1][1] == sinal && jogoVelha[1][2] == sinal) || //Linha 2
-                (jogoVelha[2][0] == sinal && jogoVelha[2][1] == sinal && jogoVelha[2][2] == sinal) || //Linha 3
-                (jogoVelha[0][0] == sinal && jogoVelha[1][0] == sinal && jogoVelha[2][0] == sinal) || //Coluna 1
-                (jogoVelha[0][1] == sinal && jogoVelha[1][1] == sinal && jogoVelha[2][1] == sinal) || //Coluna 2
-                (jogoVelha[0][2] == sinal && jogoVelha[1][2] == sinal && jogoVelha[2][2] == sinal) || //Coluna 3
-                (jogoVelha[0][0] == sinal && jogoVelha[1][1] == sinal && jogoVelha[2][2] == sinal) || //Diagonal 1
-                (jogoVelha[0][2] == sinal && jogoVelha[1][1] == sinal && jogoVelha[2][0] == sinal))//Diagonal 2
+        if ((getJogoVelha()[0][0] == sinal && getJogoVelha()[0][1] == sinal && getJogoVelha()[0][2] == sinal) || //Linha 1
+                (getJogoVelha()[1][0] == sinal && getJogoVelha()[1][1] == sinal && getJogoVelha()[1][2] == sinal) || //Linha 2
+                (getJogoVelha()[2][0] == sinal && getJogoVelha()[2][1] == sinal && getJogoVelha()[2][2] == sinal) || //Linha 3
+                (getJogoVelha()[0][0] == sinal && getJogoVelha()[1][0] == sinal && getJogoVelha()[2][0] == sinal) || //Coluna 1
+                (getJogoVelha()[0][1] == sinal && getJogoVelha()[1][1] == sinal && getJogoVelha()[2][1] == sinal) || //Coluna 2
+                (getJogoVelha()[0][2] == sinal && getJogoVelha()[1][2] == sinal && getJogoVelha()[2][2] == sinal) || //Coluna 3
+                (getJogoVelha()[0][0] == sinal && getJogoVelha()[1][1] == sinal && getJogoVelha()[2][2] == sinal) || //Diagonal 1
+                (getJogoVelha()[0][2] == sinal && getJogoVelha()[1][1] == sinal && getJogoVelha()[2][0] == sinal))//Diagonal 2
         {
             return true;
 
@@ -55,13 +60,41 @@ public class JogoVelha {
         }
     }//Fim verifica jogador
 
-    boolean vezJogador1() {
-        if (jogada % 2 == 1) {
+    public boolean vezJogador1() {
+        if (getJogada() % 2 == 1) {
             return true;
         } else {
             return false;
         }
 
+    }
+
+    /**
+     * @return the jogoVelha
+     */
+    public char[][] getJogoVelha() {
+        return jogoVelha;
+    }
+
+    /**
+     * @param jogoVelha the jogoVelha to set
+     */
+    public void setJogoVelha(char[][] jogoVelha) {
+        this.jogoVelha = jogoVelha;
+    }
+
+    /**
+     * @return the jogada
+     */
+    public int getJogada() {
+        return jogada;
+    }
+
+    /**
+     * @param jogada the jogada to set
+     */
+    public void setJogada(int jogada) {
+        this.jogada = jogada;
     }
 
 }
